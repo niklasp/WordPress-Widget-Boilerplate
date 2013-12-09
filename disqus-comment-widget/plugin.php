@@ -33,6 +33,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 class Ed_Dq_Widget extends WP_Widget {
 
+	/**
+	 * Constants
+	 */
+
+	var $settings;
+
 	/*--------------------------------------------------*/
 	/* Constructor
 	/*--------------------------------------------------*/
@@ -57,6 +63,10 @@ class Ed_Dq_Widget extends WP_Widget {
 				'classname'		=>	'Ed_Dq_Widget',
 				'description'	=>	__( 'short description here', 'widget-name-locale' )
 			)
+		);
+
+		$this->settings = array (
+			'path'			=>  plugins_url( 'disqus-comment-widget' )
 		);
 
 		//register ajax functions
@@ -268,7 +278,7 @@ class Ed_Dq_Widget extends WP_Widget {
 	public function register_admin_styles() {
 
 		// TODO:	Change 'widget-name' to the name of your plugin
-		wp_enqueue_style( 'widget-name-admin-styles', plugins_url( 'disqus-widget/css/admin.css' ) );
+		wp_enqueue_style( 'widget-name-admin-styles', $this->settings['path'] . '/css/admin.css' );
 
 	} // end register_admin_styles
 
@@ -278,7 +288,7 @@ class Ed_Dq_Widget extends WP_Widget {
 	public function register_admin_scripts() {
 
 		// TODO:	Change 'widget-name' to the name of your plugin
-		wp_enqueue_script( 'widget-name-admin-script', plugins_url( 'disqus-widget/js/admin.js' ), array('jquery') );
+		wp_enqueue_script( 'widget-name-admin-script', $this->settings['path'] . '/js/admin.js' , array('jquery') );
 
 	} // end register_admin_scripts
 
@@ -288,7 +298,7 @@ class Ed_Dq_Widget extends WP_Widget {
 	public function register_widget_styles() {
 
 		// TODO:	Change 'widget-name' to the name of your plugin
-		wp_enqueue_style( 'widget-name-widget-styles', plugins_url( 'disqus-widget/css/widget.css' ) );
+		wp_enqueue_style( 'widget-name-widget-styles', $this->settings['path']. '/css/widget.css' );
 
 	} // end register_widget_styles
 
@@ -298,7 +308,7 @@ class Ed_Dq_Widget extends WP_Widget {
 	public function register_widget_scripts() {
 
 		// TODO:	Change 'widget-name' to the name of your plugin
-		wp_enqueue_script( 'widget-name-script', plugins_url( 'disqus-widget/js/widget.js' ), array('jquery') );
+		wp_enqueue_script( 'widget-name-script', $this->settings['path'] . '/js/widget.js' , array('jquery') );
 
 	} // end register_widget_scripts
 
