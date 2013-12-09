@@ -1,7 +1,9 @@
 jQuery(document).ready(function($) {
 
+	//get recent comments
 	get_dq_results(1, jQuery('#dq-recent'));
 
+	//activate click function for popular comments
 	jQuery('#a-dq-popular').click(function() {
 		get_dq_results(2, jQuery('#dq-popular'));	
 	});
