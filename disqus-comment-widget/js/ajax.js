@@ -1,9 +1,7 @@
 jQuery(document).ready(function($) {
 
-	//get recent comments
 	get_dq_results(1, jQuery('#dq-recent'));
 
-	//activate click function for popular comments
 	jQuery('#a-dq-popular').click(function() {
 		get_dq_results(2, jQuery('#dq-popular'));	
 	});
@@ -28,20 +26,25 @@ function get_dq_results( type, display ) {
 	        url: ajax_object.ajax_url,
 	        data: data,
 	        success: function(response, textStatus, XMLHttpRequest) {
-	        	var comment_html = "";
-	            jQuery.each(response.data, function(index, comment) {
-	            	comment_html += '<div class="dsq-widget-comment">';
-	            	comment_html += '<img class="dsq-user-avatar" src="' + comment.author.avatar.cache +'" />';
-	            	comment_html += '<p class="dsq-comment-author"><a class="dq-comment-link" data-thread-id="' + comment.thread + '" data-comment-id="' + comment.id + '">' + comment.author.name + '</a></p>';
-	            	comment_html += '<p class="dsq-comment-content">' + comment.message + '</p>';
-	            	comment_html += '</div>';
-	            });
-	            display.html(comment_html);
+	        	console.log(response);
+	        	if (response.success == true) {
+		        	var comment_html = "";
+		            jQuery.each(response.data, function(index, comment) {
+		            	comment_html += '<div class="dsq-widget-comment">';
+		            	comment_html += '<img class="dsq-user-avatar" src="' + comment.author.avatar.cache +'" />';
+		            	comment_html += '<p class="dsq-comment-author"><a class="dq-comment-link" data-thread-id="' + comment.thread + '" data-comment-id="' + comment.id + '">' + comment.author.name + '</a></p>';
+		            	comment_html += '<p class="dsq-comment-content">' + comment.message + '</p>';
+		            	comment_html += '</div>';
+		            });
+		            display.html(comment_html);
 
-				jQuery('.dq-comment-link').click(function(e) {
-					e.preventDefault();
-					get_comment_link(jQuery(this).data('comment-id'),jQuery(this).data('thread-id'));
-				});	            
+					jQuery('.dq-comment-link').click(function(e) {
+						e.preventDefault();
+						get_comment_link(jQuery(this).data('comment-id'),jQuery(this).data('thread-id'));
+					});	      
+				} else {
+		            display.html('<p class="text-center">' + response.data + '</p>')
+				}   
 
 	        },
 	        error: function(MLHttpRequest, textStatus, errorThrown) {
