@@ -9,7 +9,7 @@ Version: 1.0
 Author: eedee
 Author URI: http://eedee.net
 Author Email: contact@niklasplessing.net
-Text Domain: eedee
+Text Domain: eedee-dq-widget
 Domain Path: /lang/
 Network: false
 License: GPLv2 or later
@@ -33,10 +33,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 class Ed_Dq_Widget extends WP_Widget {
 
-	/**
-	 * Constants
-	 */
-
 	var $settings;
 
 	/*--------------------------------------------------*/
@@ -58,10 +54,10 @@ class Ed_Dq_Widget extends WP_Widget {
 
 		parent::__construct(
 			'disqus_comment_widget',
-			__( 'My Disqus Widget', 'widget-name-locale' ),
+			__( 'Disqus Comment Widget', 'eedee-dq-widget' ),
 			array(
 				'classname'		=>	'Ed_Dq_Widget',
-				'description'	=>	__( 'short description here', 'widget-name-locale' )
+				'description'	=>	__( 'Displays recent and popular comments from Disqus', 'widget-name-locale' )
 			)
 		);
 
@@ -114,11 +110,11 @@ class Ed_Dq_Widget extends WP_Widget {
 				//if ( false === ( $dq_comments = get_transient( 'dq_comment_cache' ) ) ) {
 					$options = get_option('widget_disqus_comment_widget');
 					if( !isset($options) || count($options) != 2) {
-						wp_send_json_error( __( "error in ajax call", "eedee") );	
+						wp_send_json_error( __( "error in ajax call", "eedee-dq-widget") );	
 					}
 
 					if ( !is_numeric($_REQUEST['type']) ) {
-						wp_send_json_error( __( "Your data is teh suX0R", "eedee") );
+						wp_send_json_error( __( "Your data is teh suX0R", "eedee-dq-widget") );
 					}
 
 					if ( $_REQUEST['type'] == 1 ) {
@@ -231,7 +227,7 @@ class Ed_Dq_Widget extends WP_Widget {
 			(array) $instance
 		);
 
-		$title = ( isset ($instance['title'] ) ) ? esc_attr($instance['title']) : __( 'New title', 'eedee' );
+		$title = ( isset ($instance['title'] ) ) ? esc_attr($instance['title']) : __( 'New title', 'eedee-dq-widget' );
 		$disqus_api_key = ( isset ($instance['disqus_api_key'] ) ) ? esc_attr($instance['disqus_api_key']) : '';
 		$forum_key = ( isset ( $instance ['forum_key'] ) ) ? esc_attr($instance['forum_key']) : '' ;
 		$limit = ( isset ( $instance ['limit'] ) ) ? esc_attr($instance['limit']) : 5 ;
@@ -250,8 +246,7 @@ class Ed_Dq_Widget extends WP_Widget {
 	 */
 	public function widget_textdomain() {
 
-		// TODO be sure to change 'widget-name' to the name of *your* plugin
-		load_plugin_textdomain( 'widget-name-locale', false, plugin_dir_path( __FILE__ ) . '/lang/' );
+		load_plugin_textdomain( 'disqus-comment-widget', false, plugin_dir_path( __FILE__ ) . '/lang/' );
 
 	} // end widget_textdomain
 
@@ -278,8 +273,7 @@ class Ed_Dq_Widget extends WP_Widget {
 	 */
 	public function register_admin_styles() {
 
-		// TODO:	Change 'widget-name' to the name of your plugin
-		wp_enqueue_style( 'widget-name-admin-styles', $this->settings['path'] . '/css/admin.css' );
+		wp_enqueue_style( 'disqus-comment-widget-admin-styles', $this->settings['path'] . '/css/admin.css' );
 
 	} // end register_admin_styles
 
@@ -288,8 +282,7 @@ class Ed_Dq_Widget extends WP_Widget {
 	 */
 	public function register_admin_scripts() {
 
-		// TODO:	Change 'widget-name' to the name of your plugin
-		wp_enqueue_script( 'widget-name-admin-script', $this->settings['path'] . '/js/admin.js' , array('jquery') );
+		wp_enqueue_script( 'disqus-comment-widget-admin-script', $this->settings['path'] . '/js/admin.js' , array('jquery') );
 
 	} // end register_admin_scripts
 
@@ -298,8 +291,7 @@ class Ed_Dq_Widget extends WP_Widget {
 	 */
 	public function register_widget_styles() {
 
-		// TODO:	Change 'widget-name' to the name of your plugin
-		wp_enqueue_style( 'widget-name-widget-styles', $this->settings['path']. '/css/widget.css' );
+		wp_enqueue_style( 'disqus-comment-widget-styles', $this->settings['path']. '/css/widget.css' );
 
 	} // end register_widget_styles
 
@@ -308,12 +300,10 @@ class Ed_Dq_Widget extends WP_Widget {
 	 */
 	public function register_widget_scripts() {
 
-		// TODO:	Change 'widget-name' to the name of your plugin
-		wp_enqueue_script( 'widget-name-script', $this->settings['path'] . '/js/widget.js' , array('jquery') );
+		wp_enqueue_script( 'disqus-comment-widget-script', $this->settings['path'] . '/js/widget.js' , array('jquery') );
 
 	} // end register_widget_scripts
 
 } // end class
 
-// TODO:	Remember to change 'Widget_Name' to match the class name definition
 add_action( 'widgets_init', create_function( '', 'register_widget("Ed_Dq_Widget");' ) );
