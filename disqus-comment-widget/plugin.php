@@ -113,12 +113,19 @@ class Ed_Dq_Widget extends WP_Widget {
 
 				//if ( false === ( $dq_comments = get_transient( 'dq_comment_cache' ) ) ) {
 					$options = get_option('widget_disqus_comment_widget');
+					if( !isset($options) || count($options) != 2) {
+						wp_send_json_error( __( "error in ajax call", "eedee") );	
+					}
 
-					if ( is_numeric($_REQUEST['type']) && $_REQUEST['type'] == 1 ) {
+					if ( !is_numeric($_REQUEST['type']) ) {
+						wp_send_json_error( __( "Your data is teh suX0R", "eedee") );
+					}
+
+					if ( $_REQUEST['type'] == 1 ) {
 						$dq_comments = $this->get_dq_api_result('https://disqus.com/api/3.0/forums/listPosts.json?api_key='.$options['2']['disqus_api_key'].'&forum='.$options['2']['forum_key'].'&limit='.$options['2']['limit']);
-					} elseif (is_numeric($_REQUEST['type']) && $_REQUEST['type'] == 2) {
+					} elseif ( $_REQUEST['type'] == 2 ) {
 						$dq_comments = $this->get_dq_api_result('https://disqus.com/api/3.0/posts/listPopular.json?api_key='.$options['2']['disqus_api_key'].'&forum='.$options['2']['forum_key'].'&limit='.$options['2']['limit']);
-					} elseif (is_numeric($_REQUEST['type']) && $_REQUEST['type'] == 3) {
+					} elseif ( $_REQUEST['type'] == 3 ) {
 						if (is_numeric($_REQUEST['comment_id']) && is_numeric($_REQUEST['thread_id'])) {
 							$thread = $this->get_dq_api_result('https://disqus.com/api/3.0/threads/details.json?api_key='.$options['2']['disqus_api_key'].'&thread='.$_REQUEST['thread_id']);
 							$link = $thread->link;
@@ -128,11 +135,11 @@ class Ed_Dq_Widget extends WP_Widget {
 						wp_send_json_error();
 					}
 
+					//strip 
 					// foreach ($dq_comments as $comment) {
 					// 	$thread_id = $comment->thread;
 					// 	$thread = $this->get_dq_api_result('https://disqus.com/api/3.0/threads/details.json?api_secret='.$options['2']['disqus_api_key'].'&thread='.$thread_id);
 					// 	$link = $thread->link;
-
 					// 	$comment->link = $link . '#comment-' . $comment->id;
 					// }
 
@@ -224,16 +231,10 @@ class Ed_Dq_Widget extends WP_Widget {
 			(array) $instance
 		);
 
-		if ( isset( $instance[ 'title' ] ) ) {
-			$title = $instance[ 'title' ];
-		}
-		else {
-			$title = __( 'New title', 'text_domain' );
-		}
-
-		$disqus_api_key = ( isset ($instance['disqus_api_key'] ) ) ? $instance['disqus_api_key'] : '';
-		$forum_key = ( isset ( $instance ['forum_key'] ) ) ? $instance['forum_key'] : '' ;
-		$limit = ( isset ( $instance ['limit'] ) ) ? $instance['limit'] : 5 ;
+		$title = ( isset ($instance['title'] ) ) ? esc_attr($instance['title']) : __( 'New title', 'eedee' );
+		$disqus_api_key = ( isset ($instance['disqus_api_key'] ) ) ? esc_attr($instance['disqus_api_key']) : '';
+		$forum_key = ( isset ( $instance ['forum_key'] ) ) ? esc_attr($instance['forum_key']) : '' ;
+		$limit = ( isset ( $instance ['limit'] ) ) ? esc_attr($instance['limit']) : 5 ;
 		
 		// Display the admin form
 		include( plugin_dir_path(__FILE__) . '/views/admin.php' );
