@@ -1,0 +1,96 @@
+/* This stylesheet is used to style the public view of the widget. */
+/* include tabs from bootstrap */
+/*!
+ * Bootstrap v3.0.3
+ *
+ * Copyright 2013 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+.dq-nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.dq-nav:before,
+.dq-nav:after {
+  content: " ";
+  display: table;
+}
+.dq-nav:after {
+  clear: both;
+}
+.dq-nav > li {
+  position: relative;
+  display: block;
+}
+.dq-nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.dq-nav > li > a:hover,
+.dq-nav > li > a:focus {
+  text-decoration: none;
+}
+.dq-nav > li.disabled > a {
+  color: #999999;
+}
+.dq-nav > li.disabled > a:hover,
+.dq-nav > li.disabled > a:focus {
+  color: #999999;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.dq-nav .dq-nav-divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.dq-nav > li > a > img {
+  max-width: none;
+}
+.dq-nav-tabs>li{float:left;margin-bottom:-1px;}.dq-nav-tabs>li>a{margin-right:2px;line-height:0.9;border:1px solid transparent;border-radius:4px 4px 0 0;}.dq-nav-tabs>li>a:hover{border-color:#eeeeee #eeeeee #dddddd;}.dq-nav-tabs>li.active>a,.dq-nav-tabs>li.active>a:hover,.dq-nav-tabs>li.active>a:focus{color:#555555;border-bottom-color:transparent;cursor:default;}.dq-nav-tabs.nav-justified{width:100%;border-bottom:0;}.dq-nav-tabs.nav-justified>li{float:none;}.dq-nav-tabs.nav-justified>li>a{text-align:center;margin-bottom:5px;}.dq-nav-tabs.nav-justified>.dropdown .dropdown-menu{top:auto;left:auto;}@media (min-width:768px){.dq-nav-tabs.nav-justified>li{display:table-cell;width:1%;}.dq-nav-tabs.nav-justified>li>a{margin-bottom:0;}}.dq-nav-tabs.nav-justified>li>a{margin-right:0;border-radius:4px;}.dq-nav-tabs.nav-justified>.active>a,.dq-nav-tabs.nav-justified>.active>a:hover,.dq-nav-tabs.nav-justified>.active>a:focus{border:1px solid #dddddd;}@media (min-width:768px){.dq-nav-tabs.nav-justified>li>a{border-bottom:1px solid #dddddd;border-radius:4px 4px 0 0;} .dq-nav-tabs.nav-justified>.active>a,.dq-nav-tabs.nav-justified>.active>a:hover,.dq-nav-tabs.nav-justified>.active>a:focus{border-bottom-color:#ffffff;}}.nav-pills>li{float:left;}.nav-pills>li>a{border-radius:4px;}.nav-pills>li+li{margin-left:2px;}.nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus{color:#ffffff;background-color:#428bca;}.nav-stacked>li{float:none;}.nav-stacked>li+li{margin-top:2px;margin-left:0;}.nav-justified{width:100%;}.nav-justified>li{float:none;}.nav-justified>li>a{text-align:center;margin-bottom:5px;}.nav-justified>.dropdown .dropdown-menu{top:auto;left:auto;}@media (min-width:768px){.nav-justified>li{display:table-cell;width:1%;}.nav-justified>li>a{margin-bottom:0;}}.dq-nav-tabs-justified{border-bottom:0;}.dq-nav-tabs-justified>li>a{margin-right:0;border-radius:4px;}.dq-nav-tabs-justified>.active>a,.dq-nav-tabs-justified>.active>a:hover,.dq-nav-tabs-justified>.active>a:focus{border:1px solid #dddddd;}@media (min-width:768px){.dq-nav-tabs-justified>li>a{border-bottom:1px solid #dddddd;border-radius:4px 4px 0 0;} .dq-nav-tabs-justified>.active>a,.dq-nav-tabs-justified>.active>a:hover,.dq-nav-tabs-justified>.active>a:focus{border-bottom-color:#ffffff;}}.tab-content>.tab-pane{display:none;}.tab-content>.active{display:block;}.dq-nav-tabs .dropdown-menu{margin-top:-1px;border-top-right-radius:0;border-top-left-radius:0;}
+
+.loading {
+	margin: 40px 0;
+}
+.tab-content > div {
+	padding: 5px;
+}
+.dsq-user-avatar {
+	width: 48px;
+	height: 48px;
+	border-radius: 3px;
+	float: left;
+	margin: 0 8px 10px 0;
+}
+.dsq-widget-comment:nth-child(2n) {
+	float: right;
+	text-align: right;
+}
+.dsq-widget-comment:nth-child(2n) img {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH"; 
+    float: right;
+    margin: 0 0 10px 8px;
+}
+.dsq-widget-comment {
+	text-align: left;
+	padding: 10px 2px 0px;
+	display: inline-block;
+	width: 100%;
+	border-bottom: 1px dashed #eee;
+}
+.dsq-widget-comment p {
+	margin-bottom: 6px;
+}
