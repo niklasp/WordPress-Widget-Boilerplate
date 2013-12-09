@@ -63,11 +63,10 @@ function get_comment_link (comment_id, thread_id) {
 	    url: ajax_object.ajax_url,
 	    data: data,
 	    success: function(response, textStatus, XMLHttpRequest) {
-	    	console.log(response.data);
 	    	window.location = response.data;
 	    },
 	    error: function(MLHttpRequest, textStatus, errorThrown) {
-	        alert(errorThrown);
+	        console.log("error getting post link");
 	    }
 	});
 
