@@ -2,15 +2,15 @@ jQuery(document).ready(function($) {
 
 	get_dq_results(1, jQuery('#dq-recent'));
 
-	jQuery('#a-dq-trending').click(function() {
-		get_dq_results(2, jQuery('#dq-trending'));	
+	jQuery('#a-dq-popular').click(function() {
+		get_dq_results(2, jQuery('#dq-popular'));	
 	});
 
 });
 
 /**
  * gets results from php and prints on display
- * @param  {int} type 1 for recent, 2 for trending
+ * @param  {int} type 1 for recent, 2 for popular
  * @param  {jQuery element} display the jQuery element where to display
  */
 function get_dq_results( type, display ) {
@@ -18,7 +18,7 @@ function get_dq_results( type, display ) {
 	var data = {
 		action: 'handle_disqus_post',
 		security: ajax_object.ajax_nonce,	
-		type: type //1 for recent comments, 2 equals trending comments, 3 for 
+		type: type //1 for recent comments, 2 equals popular comments, 3 for 
 	};
 
 		jQuery.ajax({
