@@ -56,9 +56,7 @@ class Ed_Dq_Widget extends WP_Widget {
 			'disqus_comment_widget',
 			__( 'Disqus Comment Widget', 'eedee-dq-widget' ),
 			array(
-				'classname'		=>	'Ed_Dq_Widget',
-				'description'	=>	__( 'Displays recent and popular comments from Disqus', 'widget-name-locale' )
-			)
+				'description'	=>	__( 'Displays recent and popular comments from Disqus', 'eedee-dq-widget' ), )
 		);
 
 		$this->settings = array (
@@ -109,44 +107,55 @@ class Ed_Dq_Widget extends WP_Widget {
 
 				//if ( false === ( $dq_comments = get_transient( 'dq_comment_cache' ) ) ) {
 					$options = get_option('widget_disqus_comment_widget');
-					if( !isset($options) || count($options) != 2) {
-						wp_send_json_error( __( "error in ajax call", "eedee-dq-widget") );	
+
+					if( !isset($options)) {
+						wp_send_json_error( __( "Nope, error getting widget options", "eedee-dq-widget") );
+
+					} else {
+						if (count($options) != 4) {
+							//wp_send_json_error( $options );							
+						}
 					}
 
 					if ( !is_numeric($_REQUEST['type']) ) {
 						wp_send_json_error( __( "Your data is teh suX0R", "eedee-dq-widget") );
+
 					}
 
+					$disqus_api_key = esc_attr($options['2']['disqus_api_key']);
+					$forum_key = esc_attr($options['2']['forum_key']);
+					$limit = esc_attr($options['2']['limit']);
+
 					if ( $_REQUEST['type'] == 1 ) {
-						$dq_comments = $this->get_dq_api_result('https://disqus.com/api/3.0/forums/listPosts.json?api_key='.$options['2']['disqus_api_key'].'&forum='.$options['2']['forum_key'].'&limit='.$options['2']['limit']);
+						$dq_comments = $this->get_dq_api_result(
+							'https://disqus.com/api/3.0/forums/listPosts.json?'
+							. 'api_key=' . $disqus_api_key
+							. '&forum='  . $forum_key
+							. '&limit='  . $limit);
 					} elseif ( $_REQUEST['type'] == 2 ) {
-						$dq_comments = $this->get_dq_api_result('https://disqus.com/api/3.0/posts/listPopular.json?api_key='.$options['2']['disqus_api_key'].'&forum='.$options['2']['forum_key'].'&limit='.$options['2']['limit']);
+						$dq_comments = $this->get_dq_api_result(
+							'https://disqus.com/api/3.0/posts/listPopular.json?'
+							. 'api_key=' . $disqus_api_key
+							. '&forum='  . $forum_key
+							. '&limit='  . $limit);
 					} elseif ( $_REQUEST['type'] == 3 ) {
-						if (is_numeric($_REQUEST['comment_id']) && is_numeric($_REQUEST['thread_id'])) {
-							$thread = $this->get_dq_api_result('https://disqus.com/api/3.0/threads/details.json?api_key='.$options['2']['disqus_api_key'].'&thread='.$_REQUEST['thread_id']);
+						if (is_numeric($_REQUEST['comment_id']) 
+							&& is_numeric($_REQUEST['thread_id'])) {
+							$thread = $this->get_dq_api_result(
+								'https://disqus.com/api/3.0/threads/details.json?'
+								. 'api_key=' . $disqus_api_key 
+								. '&thread=' .$_REQUEST['thread_id']);
 							$link = $thread->link;
 							$dq_comments = $link . '#comment-' . $_REQUEST['comment_id'];
 						}
 					} else {
-						wp_send_json_error();
+						wp_send_json_error(__( "You hose!", "eedee-dq-widget") );
 					}
-
-					//strip 
-					// foreach ($dq_comments as $comment) {
-					// 	$thread_id = $comment->thread;
-					// 	$thread = $this->get_dq_api_result('https://disqus.com/api/3.0/threads/details.json?api_secret='.$options['2']['disqus_api_key'].'&thread='.$thread_id);
-					// 	$link = $thread->link;
-					// 	$comment->link = $link . '#comment-' . $comment->id;
-					// }
-
-					//set_transient( 'dq_comment_cache', $dq_comments, 60 * 60 * 3);	
-
-				//} 
 
 				wp_send_json_success($dq_comments);
 			} 
 		} else {
-			wp_send_json_error();
+			wp_send_json_error( __( "Try floating somewhere else", "eedee-dq-widget") );
 		}
 	}
 
@@ -222,7 +231,6 @@ class Ed_Dq_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 
-    	// TODO:	Define default values for your variables
 		$instance = wp_parse_args(
 			(array) $instance
 		);
@@ -305,5 +313,6 @@ class Ed_Dq_Widget extends WP_Widget {
 	} // end register_widget_scripts
 
 } // end class
-
-add_action( 'widgets_init', create_function( '', 'register_widget("Ed_Dq_Widget");' ) );
+add_action( 'widgets_init', function(){
+     register_widget( 'Ed_Dq_Widget' );
+});
