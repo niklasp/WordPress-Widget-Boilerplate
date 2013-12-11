@@ -56,7 +56,8 @@ class Ed_Dq_Widget extends WP_Widget {
 			'disqus_comment_widget',
 			__( 'Disqus Comment Widget', 'eedee-dq-widget' ),
 			array(
-				'description'	=>	__( 'Displays recent and popular comments from Disqus', 'eedee-dq-widget' ), )
+				'description'	=>	__( 'Displays recent and popular comments from Disqus', 'eedee-dq-widget' ), 
+				)
 		);
 
 		$this->settings = array (
@@ -106,14 +107,14 @@ class Ed_Dq_Widget extends WP_Widget {
 			if ($error == false) {
 
 				//if ( false === ( $dq_comments = get_transient( 'dq_comment_cache' ) ) ) {
-					$options = get_option('widget_disqus_comment_widget');
-
-					if( !isset($options)) {
+					$options = get_option( 'widget_disqus_comment_widget' );
+					
+					if( !isset($options) || !isset($options[$this->number])) {
 						wp_send_json_error( __( "Nope, error getting widget options", "eedee-dq-widget") );
-
 					} else {
-						if (count($options) != 4) {
-							//wp_send_json_error( $options );							
+						$instance_options = $options[$this->number];
+						if (count($instance_options) != 4) {
+							wp_send_json_error( __( "Enter all required fields in the widget options", "eedee-dq-widget") );							
 						}
 					}
 
@@ -122,9 +123,9 @@ class Ed_Dq_Widget extends WP_Widget {
 
 					}
 
-					$disqus_api_key = esc_attr($options['2']['disqus_api_key']);
-					$forum_key = esc_attr($options['2']['forum_key']);
-					$limit = esc_attr($options['2']['limit']);
+					$disqus_api_key = esc_attr($instance_options['disqus_api_key']);
+					$forum_key = esc_attr($instance_options['forum_key']);
+					$limit = esc_attr($instance_options['limit']);
 
 					if ( $_REQUEST['type'] == 1 ) {
 						$dq_comments = $this->get_dq_api_result(
