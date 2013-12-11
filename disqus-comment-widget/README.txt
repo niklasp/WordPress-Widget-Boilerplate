@@ -1,15 +1,15 @@
 === Widget Name ===
 
-Contributors: username1, username2 (this should be a list of wordpress.org userid's)
-Donate link: http://example.com/
-Tags: widget, boilerplate
+Contributors: niklasp
+Donate link: http://eedee.net/donate
+Tags: widget, comments, ajax, recent, popular, disqus
 Requires at least: 3.3.1
 Tested up to: 3.3.1
 Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+This plugin installs a widget, that connects to the official Disqus API via ajax to get the most recent or the most popular comments.
 
 == Description ==
 
@@ -50,42 +50,24 @@ e.g.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Can I get support somewhere? =
 
-An answer to that question.
+Write us a nice mail to widgetcontact@eedee.net
 
-= What about foo bar? =
+= How can I change the css style of the widget? =
 
-Answer to foo bar dilemma.
+go to the plugin folder in wp-content/plugins/disqus-comment-widget/css and change the widget.css to your needs
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
-2. This is the second screen shot
+1. The widget view, displaying recent disqus comments `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
+2. The widget view, displaying popular disqus comments
+3. The widget admin settings. Enter a title, public disqus api key, forum id, and the number of comments to display
 
 == Changelog ==
 
 = 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
+* Initial Version that is waiting for your contributions at [github](https://github.com/niklasp/disqus-comment-widget)
 
 == A brief Markdown Example ==
 
