@@ -2,9 +2,8 @@
 /*
 Plugin Name: Disqus Comment Widget
 Plugin URI: http://eedee.net/disqus-comment-widget
-Description: Lists disqus comments, decide between recent comments or popular comments. Uses the <a href="https://github.com/disqus/disqus-php">official disqus API</a>. 
+Description: Lists disqus comments via AJAX. Decide between recent comments or popular comments. Uses the <a href="https://github.com/disqus/disqus-php">official disqus API</a>. 
 Register <a href="http://help.disqus.com/customer/portal/articles/787016-how-to-create-an-api-application">here</a> for an API Key.
-Uses Ajax to fetch comments dynamically.
 Version: 1.0
 Author: eedee
 Author URI: http://eedee.net
@@ -15,7 +14,7 @@ Network: false
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Copyright 2013 edee (email@domain.com)
+Copyright 2013 edee (contact@niklasplessing.net)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
